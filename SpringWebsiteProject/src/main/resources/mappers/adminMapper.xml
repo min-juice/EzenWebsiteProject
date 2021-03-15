@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.repository.AdminDAO">
+
+	<select id="list" resultType="kr.co.domain.FMemberVO">
+		SELECT * FROM F_MEMBER
+	</select>
+
+	<select id="read" resultType="kr.co.domain.FMemberVO">
+		SELECT * FROM F_MEMBER WHERE memId
+		= #{memId}
+	</select>
+
+	<update id="update">
+		UPDATE F_MEMBER set memName = #{memName], memMail =
+		${memMail},
+		memAd1 = ${memAd1}, memAd2 = ${memAd2}, memAd3 = ${memAd3},
+		updatedate=SYSDATE
+		WHERE memId = #{memId} and memPw = #{memPw}
+	</update>
+
+	<!-- 카테고리 호출 -->
+	<select id="category" resultType="kr.co.domain.CategoryVO">
+		SELECT level, fName, fCode,
+		fCodeRef from goods_category
+		start with fCodeRef is null connect by
+		prior fCode = fCodeRef
+	</select>
+
+	<!-- 상품 등록 -->
+	<insert id="register">
+		INSERT INTO goods (fNum, fName, fCode, fPrice, fStock, fDes)
+		values (goodsSeq.nextval, #{fName}, #{fCode}, #{fPrice}, #{fStock}, #{fDes})
+	</insert>
+	
+	<!-- 상품 목록  -->
+	<select id="goodslist" resultType="kr.co.domain.GoodsVO">
+		SELECT fNum, fName, fcCode, fPrice, fStock, fDes, fImg, fDate
+		from goods order by fNum desc
+	</select>
+	
+	<!--view -->
+	<!-- <select id="goodsView" resultType="kr.co.domain.GoodsVO">
+	 	SELECT fNum, fName, fCode, fPrice, fStock, fDes, fImg, fDate
+	 	from goods where fNum = #{fNum}
+	</select> -->
+	
+	<!-- 상품 조회 + 카테고리 조인 -->
+		<select id="goodsView" resultType="kr.co.domain.GoodsViewVO">
+			select g.fNum, g.fName, g.fCode, c.fcCodeRef, c.fcName, fPrice, fStock, fDes, fImg, fDate
+			from goods g
+				inner join goods_category c
+					on g.fCode = c.fcCode
+						where g.fNum = #{fNum}
+						</select>
+						
+</mapper>	
