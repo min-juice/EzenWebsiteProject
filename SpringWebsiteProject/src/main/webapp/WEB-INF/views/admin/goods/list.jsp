@@ -17,23 +17,10 @@
  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script
  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+ 
 </head>
 <body>
-<div>
-	<nav id="nav">
-		<div id="nav_box">
-			<%-- <%@ include file="../include/nav.jsp" %> --%>
-		</div>
-	</nav>
-	
-	<section id="container">
-		<aside>
-			<%-- <%@ include file="../include/aside.jsp" %> --%>
-		</aside>
-		<div id="container_box">
-			<!-- <h2>상품 목록</h2> -->
-			
-			<table>
+<table>
  <thead>
   <tr>
    <th>번호</th>
@@ -47,27 +34,21 @@
  <tbody>
   <c:forEach items="${list}" var="list">
   <tr>
-   <td>${list.fNum}</td>
+   <td>${list.gdsNum}</td>
    <td>
-   	<a href="/admin/goods/view?n=${list.fNum}">${list.fName}</a></td>
-   <td>${list.fCode}</td>
-   <td>${list.fPrice}</td>
-   <td>${list.fStock}</td>
-   <td>${list.fDate}</td>
+   		<a href="/admin/goods/view?n=${list.gdsNum}">${list.gdsName}</a>
+   </td>
+   <td>${list.cateCode}</td>
+   <td>
+   		<fmt:formatNumber value="${list.gdsPrice}" pattern="###,###,###"/>
+   </td>
+   <td>${list.gdsStock}</td>
+   <td>
+   		<fmt:formatDate value="${list.gdsDate}" pattern="yyyy-MM-dd"/>
+   	</td>
   </tr>   
   </c:forEach>
  </tbody>
 </table>
-		</div>
-	</section>
-	
-	<footer id="footer">
-		<div id="footer_box">
-			<%-- <%@ include file="../include/footer.jsp" %> --%>
-		</div>
-	</footer>
-	
-</div>
-
 </body>
 </html>

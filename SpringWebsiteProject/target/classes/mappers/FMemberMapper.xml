@@ -19,16 +19,23 @@
   	 	memId = #{memId}
   	 </select>
   	 	
+  	 <!-- 회원목록 -->	
+  	 <select id="list" resultType="kr.co.domain.FMemberVO">
+  	 	select * from f_member order by memId desc
+  	 </select>	
+  	 	
+  	 <!-- 회원정보 조회 -->
 	<select id="read" resultType="kr.co.domain.FMemberVO">
-		SELECT * FROM f_member where memId = #{memId, jdbcType=VARCHAR}
+		SELECT * FROM f_member where memId = #{memId}
 	</select>
-  
+  	<!-- 회원 수정 -->
   	<update id="update">
   		UPDATE F_MEMBER set memName = #{memName}, memMail = ${memMail},
   		memAd1 = ${memAd1}, memAd2 = ${memAd2}, memAd3 = ${memAd3}
   		  		WHERE memId = #{memId} and memPw = #{memPw}
   	</update>
   	
+  	<!-- 회원 삭제 -->
   	<delete id="delete">
       DELETE FROM F_MEMBER WHERE memId = #{memId} AND memPw = #{memPw}
    </delete>

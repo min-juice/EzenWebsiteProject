@@ -15,8 +15,9 @@ public class FMemberServiceImpl implements FMemberService{
 	@Inject
 	FMemberDAO dao;
 
+	/* 회원가입 */
 	@Override
-	public void insert(FMemberVO vo) {
+	public void insert(FMemberVO vo) throws Exception  {
 		dao.insert(vo);
 		
 	}
@@ -35,28 +36,39 @@ public class FMemberServiceImpl implements FMemberService{
 		return dao.memberLogin(vo);
 	}
 
+	/* 회원정보 조회 */
 	@Override
-	public FMemberVO read(String memId) {
+	public FMemberVO read(String memId) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.read(memId);
 	}
 
+	/* 회원정보 수정 */
 	@Override
-	public FMemberVO updateUI(String memId) {
+	public FMemberVO updateUI(String memId) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.read(memId);
 	}
 
+	/* 회원정보 수정 */
 	@Override
-	public int update(FMemberVO vo) {
+	public int update(FMemberVO vo) throws Exception {
 		int successCount = dao.update(vo);
 		return successCount;
 	}
 
+	/* 회원정보 삭제 */
 	@Override
-	public void delete(FMemberVO vo) {
-		dao.delete(vo);
+	public void delete(String memId) throws Exception {
+		dao.delete(memId);
 		
+	}
+
+	/* 회원정보 목록 */
+	@Override
+	public List<FMemberVO> list() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.list();
 	}
 
 	

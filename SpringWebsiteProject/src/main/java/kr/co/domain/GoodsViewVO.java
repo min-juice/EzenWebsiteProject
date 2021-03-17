@@ -4,102 +4,77 @@ import java.sql.Date;
 
 public class GoodsViewVO {
 	
-	private int fNum;
-	private String fName;
-	private String fCode;
-	private int fPrice;
-	private int fStock;
-	private String fDes;
-	private String fImg;
-	private Date fDate;
+	private int gdsNum;
+	private String gdsName;
+	private String cateCode;
+	private int gdsPrice;
+	private int gdsStock;
+	private String gdsDes;
+	private String gdsImg;
+	private Date gdsDate;
 	
-	private String fCodeRef;
-	private String fcName;
-	
-	public GoodsViewVO() {
-		// TODO Auto-generated constructor stub
+	private String cateCodeRef;
+	private String cateName;
+	public int getGdsNum() {
+		return gdsNum;
 	}
-
-	public int getfNum() {
-		return fNum;
+	public void setGdsNum(int gdsNum) {
+		this.gdsNum = gdsNum;
 	}
-
-	public void setfNum(int fNum) {
-		this.fNum = fNum;
+	public String getGdsName() {
+		return gdsName;
 	}
-
-	public String getfName() {
-		return fName;
+	public void setGdsName(String gdsName) {
+		this.gdsName = gdsName;
 	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
+	public String getCateCode() {
+		return cateCode;
 	}
-
-	public String getfCode() {
-		return fCode;
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
 	}
-
-	public void setfCode(String fCode) {
-		this.fCode = fCode;
+	public int getGdsPrice() {
+		return gdsPrice;
 	}
-
-	public int getfPrice() {
-		return fPrice;
+	public void setGdsPrice(int gdsPrice) {
+		this.gdsPrice = gdsPrice;
 	}
-
-	public void setfPrice(int fPrice) {
-		this.fPrice = fPrice;
+	public int getGdsStock() {
+		return gdsStock;
 	}
-
-	public int getfStock() {
-		return fStock;
+	public void setGdsStock(int gdsStock) {
+		this.gdsStock = gdsStock;
 	}
-
-	public void setfStock(int fStock) {
-		this.fStock = fStock;
+	public String getGdsDes() {
+		return gdsDes;
 	}
-
-	public String getfDes() {
-		return fDes;
+	public void setGdsDes(String gdsDes) {
+		this.gdsDes = gdsDes;
 	}
-
-	public void setfDes(String fDes) {
-		this.fDes = fDes;
+	public String getGdsImg() {
+		return gdsImg;
 	}
-
-	public String getfImg() {
-		return fImg;
+	public void setGdsImg(String gdsImg) {
+		this.gdsImg = gdsImg;
 	}
-
-	public void setfImg(String fImg) {
-		this.fImg = fImg;
+	public Date getGdsDate() {
+		return gdsDate;
 	}
-
-	public Date getfDate() {
-		return fDate;
+	public void setGdsDate(Date gdsDate) {
+		this.gdsDate = gdsDate;
 	}
-
-	public void setfDate(Date fDate) {
-		this.fDate = fDate;
+	public String getCateCodeRef() {
+		return cateCodeRef;
 	}
-
-	public String getfCodeRef() {
-		return fCodeRef;
+	public void setCateCodeRef(String cateCodeRef) {
+		this.cateCodeRef = cateCodeRef;
 	}
-
-	public void setfCodeRef(String fCodeRef) {
-		this.fCodeRef = fCodeRef;
+	public String getCateName() {
+		return cateName;
 	}
-
-	public String getFcName() {
-		return fcName;
-	}
-
-	public void setFcName(String fcName) {
-		this.fcName = fcName;
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 	
 	
-
 }

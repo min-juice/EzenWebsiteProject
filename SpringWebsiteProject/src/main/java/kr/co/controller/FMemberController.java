@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -187,51 +188,60 @@ public class FMemberController {
 
 	}
 	
+	
+	/* 회원정보 리스트 이동 */
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public void List(Model model) throws Exception{
+		
+		List<FMemberVO> list = fservice.list();
+		model.addAttribute("list", list);
+	}
+	
+	/* 회원정보 리스트 조회 */
 	@RequestMapping(value = "read", method = RequestMethod.GET)
-	public void read(String memId, Model model) {
+	public void read(@RequestParam("memId") String memId, Model model) throws Exception {
 		
 		FMemberVO vo = fservice.read(memId);
 		
-		model.addAttribute("vo", vo);
+		model.addAttribute("read", vo);
 	}
 	
-	@RequestMapping(value = "update/{memId}", method = RequestMethod.GET)
-	public String update(@PathVariable("memId") String memId, Model model) {
+	/* 회원정보 수정조회 */
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(@RequestParam("memId") String memId, Model model) throws Exception {
 		
 		FMemberVO vo = fservice.updateUI(memId);
 		model.addAttribute("vo", vo);
 		
 		
-		return "update";
 	}
 	
+	
+	/* 회원정보 수정 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(FMemberVO vo, Model model) {
+	public String update(FMemberVO vo) throws Exception {
 		int successCount = fservice.update(vo);
+		
 		
 		if(successCount >= 1) {
 			return "redirect:/read";
 		}else {
-			return "redirect:/update/"+vo.getMemId();
+			return "redirect:/update?memId=${vo.memId}";
 		}
 	}
+	   
+	/* 회원정보 삭제 */
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public String delete(@RequestParam("memId") String memId) throws Exception{
+		fservice.delete(memId);
+		
+		return "redirect:/fmember/list";
+	}
 	
-	 @RequestMapping(value = "delete", method = RequestMethod.POST)
-	   public String delete(FMemberVO vo) {
-		 System.out.println(">>>>>>>>>>>");
-		 System.out.println(vo.getMemId());
-		 System.out.println(vo.getMemPw());
-	      
-	      fservice.delete(vo);
-	      
-	      return "redirect:/list";
-	   }
-	   
-	   
-	   @RequestMapping(value = "deleteConfirm/{memId}", method = RequestMethod.GET)
-	   public String deleteConfirm(@PathVariable("memId") String memId, Model model) {
-	      model.addAttribute("memId", memId);
-	      return "delete";
+	 /* 회원정보 삭제 */
+	   @RequestMapping(value = "delete", method = RequestMethod.GET)
+	   public void deleteConfirm(@RequestParam("memId") String memId, Model model) throws Exception {
+	      model.addAttribute("delete", memId);
 	   }
 	
 	

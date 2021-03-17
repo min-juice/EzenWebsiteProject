@@ -44,28 +44,45 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	//카테고리
 	@Override
 	public List<CategoryVO> category() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.category();
 	}
 
+	//상품등록
 	@Override
-	public void register(GoodsVO vo) {
+	public void register(GoodsVO vo)  throws Exception{
 		// TODO Auto-generated method stub
 		dao.register(vo);
 	}
 
+	//상품목록
 	@Override
-	public List<GoodsVO> goodslist() {
+	public List<GoodsVO> goodslist() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.goodslist();
 	}
 
+	//상품조회 + 카테고리 조인
 	@Override
-	public GoodsViewVO goodsView(int fNum) {
+	public GoodsViewVO goodsView(int gdsNum) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.goodsView(fNum);
+		return dao.goodsView(gdsNum);
+	}
+	
+	//상품 수정
+	@Override
+	public void goodsModify(GoodsVO vo) throws Exception {
+		dao.goodsModify(vo);
+		
+	}
+
+	@Override
+	public void goodsDelete(int gdsNum) throws Exception {
+		dao.goodsDelete(gdsNum);
+		
 	}
 
 }

@@ -3,142 +3,107 @@ package kr.co.domain;
 import java.sql.Date;
 
 public class GoodsVO {
-	private int fNum;
-	private String fName;
-	private String fCode;
-	private int fPrice;
-	private int fStock;
-	private String fDes;
-	private String fImg;
-	private Date fDate;
-	
-	
-	
+
+    /*
+    gdsNum       number          not null,
+    gdsName      varchar2(50)    not null,
+    cateCode     varchar2(30)    not null,
+    gdsPrice     number          not null,
+    gdsStock     number          null,
+    gdsDes       varchar(500)    null,
+    gdsImg       varchar(200)    null,
+    gdsDate      date            default sysdate,
+    primary key(gdsNum)  
+    */
+    
+    private int gdsNum;
+    private String gdsName;
+    private String cateCode;
+    private int gdsPrice;
+    private int gdsStock;
+    private String gdsDes;
+    private String gdsImg;
+    private Date gdsDate;
+    
+    private String gdsThumbImg;
+    
+    
+    
+    public String getGdsThumbImg() {
+		return gdsThumbImg;
+	}
+
+	public void setGdsThumbImg(String gdsThumbImg) {
+		this.gdsThumbImg = gdsThumbImg;
+	}
+
 	public GoodsVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public GoodsVO(int fNum, String fName, String fCode, int fPrice, int fStock, String fDes, String fImg, Date fDate) {
-		super();
-		this.fNum = fNum;
-		this.fName = fName;
-		this.fCode = fCode;
-		this.fPrice = fPrice;
-		this.fStock = fStock;
-		this.fDes = fDes;
-		this.fImg = fImg;
-		this.fDate = fDate;
+
+	public int getGdsNum() {
+		return gdsNum;
 	}
 
-	public int getfNum() {
-		return fNum;
+	public void setGdsNum(int gdsNum) {
+		this.gdsNum = gdsNum;
 	}
 
-	public void setfNum(int fNum) {
-		this.fNum = fNum;
+	public String getGdsName() {
+		return gdsName;
 	}
 
-	public String getfName() {
-		return fName;
+	public void setGdsName(String gdsName) {
+		this.gdsName = gdsName;
 	}
 
-	public void setfName(String fName) {
-		this.fName = fName;
+	public String getCateCode() {
+		return cateCode;
 	}
 
-	public String getfCode() {
-		return fCode;
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
 	}
 
-	public void setfCode(String fCode) {
-		this.fCode = fCode;
+	public int getGdsPrice() {
+		return gdsPrice;
 	}
 
-	public int getfPrice() {
-		return fPrice;
+	public void setGdsPrice(int gdsPrice) {
+		this.gdsPrice = gdsPrice;
 	}
 
-	public void setfPrice(int fPrice) {
-		this.fPrice = fPrice;
+	public int getGdsStock() {
+		return gdsStock;
 	}
 
-	public int getfStock() {
-		return fStock;
+	public void setGdsStock(int gdsStock) {
+		this.gdsStock = gdsStock;
 	}
 
-	public void setfStock(int fStock) {
-		this.fStock = fStock;
+	public String getGdsDes() {
+		return gdsDes;
 	}
 
-	public String getfDes() {
-		return fDes;
+	public void setGdsDes(String gdsDes) {
+		this.gdsDes = gdsDes;
 	}
 
-	public void setfDes(String fDes) {
-		this.fDes = fDes;
+	public String getGdsImg() {
+		return gdsImg;
 	}
 
-	public String getfImg() {
-		return fImg;
+	public void setGdsImg(String gdsImg) {
+		this.gdsImg = gdsImg;
 	}
 
-	public void setfImg(String fImg) {
-		this.fImg = fImg;
+	public Date getGdsDate() {
+		return gdsDate;
 	}
 
-	public Date getfDate() {
-		return fDate;
+	public void setGdsDate(Date gdsDate) {
+		this.gdsDate = gdsDate;
 	}
-
-	public void setfDate(Date fDate) {
-		this.fDate = fDate;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((fCode == null) ? 0 : fCode.hashCode());
-		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
-		result = prime * result + fNum;
-		result = prime * result + fPrice;
-		result = prime * result + fStock;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GoodsVO other = (GoodsVO) obj;
-		if (fCode == null) {
-			if (other.fCode != null)
-				return false;
-		} else if (!fCode.equals(other.fCode))
-			return false;
-		if (fName == null) {
-			if (other.fName != null)
-				return false;
-		} else if (!fName.equals(other.fName))
-			return false;
-		if (fNum != other.fNum)
-			return false;
-		if (fPrice != other.fPrice)
-			return false;
-		if (fStock != other.fStock)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "GoodsVO [fNum=" + fNum + ", fName=" + fName + ", fCode=" + fCode + "]";
-	}
-	
-	
+    
+    
 }
