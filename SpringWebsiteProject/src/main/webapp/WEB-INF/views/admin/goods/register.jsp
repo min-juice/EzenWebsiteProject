@@ -17,7 +17,26 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+ <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<!-- ckeditor 연결 -->
+<script src="/resources/ckeditor/config.js"></script>
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
+<!-- 상품가격과 수량에 숫자만 입력  -->
+<script>
+var regExp = /[^0-9]/gi;
+
+$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+$("#gdsStock").keyup(function(){ numCheck($(this)); });
+
+function numCheck(selector) {
+ var tempVal = selector.val();
+ selector.val(tempVal.replace(regExp, ""));
+}
+</script>
+
 <body>
 <form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 
@@ -51,7 +70,20 @@
 <div class="inputArea">
  <label for="gdsDes">상품소개</label>
  <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+ 
+<!-- <script>
+ var ckeditor_config = {
+   resize_enaleb : false,
+   enterMode : CKEDITOR.ENTER_BR,
+   shiftEnterMode : CKEDITOR.ENTER_P,
+   filebrowserUploadUrl : "/admin/goods/ckUpload"
+ };
+ 
+ CKEDITOR.replace("gdsDes", ckeditor_config);
+</script> -->
+
 </div>
+
 
 <div class="inputArea">
  <label for="gdsImg">이미지</label>

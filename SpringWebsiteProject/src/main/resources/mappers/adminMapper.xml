@@ -31,23 +31,33 @@
 
 	<!-- 상품 등록 -->
 	<insert id="register">
-		insert into tbl_goods (gdsNum, gdsName, cateCode,
-		gdsPrice, gdsStock,
-		gdsDes)
-		values (tbl_goods_seq.nextval, #{gdsName},
-		#{cateCode}, #{gdsPrice},
-		#{gdsStock}, #{gdsDes})
+		insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock,
+		gdsDes,
+		gdsImg, gdsThumbImg)
+		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice},
+		#{gdsStock}, #{gdsDes},
+		#{gdsImg}, #{gdsThumbImg})
 	</insert>
 
 	<!-- 상품 목록 -->
-	<select id="goodslist" resultType="kr.co.domain.GoodsVO">
+	<!-- <select id="goodslist" resultType="kr.co.domain.GoodsVO">
 		select
 		gdsNum, gdsName,
 		cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
 		from tbl_goods
 		order by gdsNum desc
-	</select>
+	</select> -->
 
+	<select id="goodslist" resultType="kr.co.domain.GoodsViewVO">
+		select
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock,
+		gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
+		from tbl_goods g
+		inner join goods_category c
+		on g.cateCode = c.cateCode
+	</select>
+	
 	<!-- 상품 조회 -->
 	<!-- <select id="goodsView" resultType="kr.co.domain.GoodsVO"> select gdsNum, 
 		gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate from tbl_goods 
@@ -56,14 +66,12 @@
 	<!-- 상품 조회 + 카테고리 조인 -->
 	<select id="goodsView" resultType="kr.co.domain.GoodsViewVO">
 		select
-		g.gdsNum, g.gdsName,
-		g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock,
-		gdsDes,
-		gdsImg, gdsDate
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock,
+		gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
 		from tbl_goods g
 		inner join goods_category c
-		on
-		g.cateCode = c.cateCode
+		on g.cateCode = c.cateCode
 		where g.gdsNum = #{gdsNum}
 	</select>
 
@@ -72,12 +80,14 @@
 		update tbl_goods
 		set
 		gdsName = #{gdsName},
-		cateCode =
-		#{cateCode},
+		cateCode = #{cateCode},
 		gdsPrice = #{gdsPrice},
 		gdsStock = #{gdsStock},
-		gdsDes =
-		#{gdsDes}
+		gdsDes = #{gdsDes},
+
+		gdsImg = #{gdsImg},
+		gdsThumbImg = #{gdsThumbImg}
+
 		where gdsNum = ${gdsNum}
 	</update>
 
@@ -88,15 +98,7 @@
 		where gdsNum = #{gdsNum}
 	</delete>
 
-	 <!-- 상품 등록 -->
-	<!--<insert id="register">
-		insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock,
-		gdsDes,
-		gdsImg, gdsThumbImg)
-		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice},
-		#{gdsStock}, #{gdsDes},
-		#{gdsImg}, #{gdsThumbImg})
-	</insert> -->
+
 
 
 </mapper>	

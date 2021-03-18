@@ -19,13 +19,49 @@
  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
+<form role="form" method="post" autocomplete="off">
 <h1>회원 정보 자세히 보기</h1>
-아이디: ${vo.memId}<br>
-이름: ${vo.memName}<br>
-이메일: ${vo.memMail}<br>
-가입일: <fmt:formatDate value="${vo.regdate}" type="date" pattern="yyyy-MM-dd"/><br>
-최종 변경일: ${vo.updatedate}<br>
+
+아이디: ${read.memId}<br>
+이름: ${read.memName}<br>
+이메일: ${read.memMail}<br>
+
+주소: ${read.memAd2}<br>
+주소: ${read.memAd3}<br>
+주소: ${read.memAd1}<br>
+가입일: <fmt:formatDate value="${read.regDate}" type="date" pattern="yyyy-MM-dd"/><br>
+최종 변경일: <fmt:formatDate value="${read.updatedate}" type="date" pattern="yyyy-MM-dd"/><br>
 <hr>
-<a href="/fmember/update/${vo.memId}">수정</a> | <a id="delbtn" href="deleteConfirm/${vo.memId}">삭제</a>
+
+ <p>
+  <button id="modity_btn">수정</button>
+  <button id="delete_btn">삭제</button>
+ </p>
+
+<script>
+ 
+ // 폼을 변수에 저장
+ var formObj = $("form[role='form']");
+ 
+ // 수정 버튼 클릭
+ $("#modity_btn").click(function(){
+  
+  formObj.attr("action", "/fmember/update");
+  formObj.attr("method", "get");  
+  formObj.submit();     
+  
+ });
+ 
+ 
+ // 삭제 버튼 클릭
+ $("#delete_btn").click(function(){
+  
+  formObj.attr("action", "/fmember/delete");
+  formObj.attr("method", "get");  
+  formObj.submit();
+  
+ });
+ </script>
+ </form>
 </body>
 </html>

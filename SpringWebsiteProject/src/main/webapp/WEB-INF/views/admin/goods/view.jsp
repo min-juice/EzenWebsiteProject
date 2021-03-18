@@ -18,7 +18,18 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
+<style>
+.oriImg{ width:500px; hegiht:auto;}
+.thumbImg{}
+</style>
 <body>
+<section id="container">
+	<aside>
+		<%-- <%@ inClude file="../include/aside/jsp" %> --%>
+	</aside>
+	<div id="container_box">
+		<h2>상품 조회</h2>
+		
 <form role="form" method="post" autocomplete="off">
 <input type="hidden" name="n" value="${goods.gdsNum}" />
 
@@ -50,6 +61,15 @@
 </div>
 
 <div class="inputArea">
+ <label for="gdsImg">이미지</label>
+ <p>원본 이미지</p>
+ <img src="${goods.gdsImg}" class="oriImg"/>
+ 
+ <p>썸네일</p>
+ <img src="${goods.gdsThumbImg}" class="thumbImg"/>
+</div>
+
+<div class="inputArea">
  <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
  <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
  
@@ -70,7 +90,7 @@
 </div>
 
 </form>
-
+</div>
 <script>
 // 컨트롤러에서 데이터 받기
 var jsonData = JSON.parse('${category}');
@@ -155,6 +175,6 @@ $("#delete_Btn").click(function(){
 
 
 </script>
-
+</section>
 </body>
 </html>

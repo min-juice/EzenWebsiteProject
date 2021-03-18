@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import kr.co.domain.FMemberVO;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.GoodsViewVO;
 import kr.co.service.AdminService;
-
+import kr.co.utils.UploadFileUtils;
 import net.sf.json.JSONArray;
 
 
@@ -83,8 +84,21 @@ public class AdminController {
 		model.addAttribute("category", JSONArray.fromObject(category));
 	}
 	
+	//상품등록
 	@RequestMapping(value = "/goods/register", method = RequestMethod.POST)
 	public String postGoodRegister(GoodsVO vo, MultipartFile file) throws Exception {
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file != null) {
+		 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		vo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		
 		aservice.register(vo);
 		
@@ -96,7 +110,7 @@ public class AdminController {
 		public void getGoodsList(Model model) throws Exception{
 			logger.info("get goods list");
 			
-			List<GoodsVO> list = aservice.goodslist();
+			List<GoodsViewVO> list = aservice.goodslist();
 			
 			model.addAttribute("list", list);
 		}
@@ -127,10 +141,31 @@ public class AdminController {
 		 
 		// 상품 수정
 		  @RequestMapping(value = "/goods/modify", method = RequestMethod.POST)
-		  public String postGoodsModify(GoodsVO vo) throws Exception {
+		  public String postGoodsModify(GoodsVO vo, MultipartFile file, HttpServletRequest req) throws Exception {
 		   logger.info("post goods modify");
 
-		  aservice.goodsModify(vo);
+		   // 새로운 파일이 등록되었는지 확인
+		   if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		    // 기존 파일을 삭제
+		    new File(uploadPath + req.getParameter("gdsImg")).delete();
+		    new File(uploadPath + req.getParameter("gdsThumbImg")).delete();
+		    
+		    // 새로 첨부한 파일을 등록
+		    String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		    String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		    String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+		    
+		    vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		    vo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		    
+		   } else {  // 새로운 파일이 등록되지 않았다면
+		    // 기존 이미지를 그대로 사용
+		    vo.setGdsImg(req.getParameter("gdsImg"));
+		    vo.setGdsThumbImg(req.getParameter("gdsThumbImg"));
+		    
+		   }
+		   
+		   aservice.goodsModify(vo);
 		   
 		   return "redirect:/admin/main";
 		  }

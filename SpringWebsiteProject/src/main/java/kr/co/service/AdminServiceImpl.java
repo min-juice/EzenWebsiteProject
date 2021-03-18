@@ -60,7 +60,7 @@ public class AdminServiceImpl implements AdminService{
 
 	//상품목록
 	@Override
-	public List<GoodsVO> goodslist() throws Exception {
+	public List<GoodsViewVO> goodslist() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.goodslist();
 	}
