@@ -28,4 +28,74 @@ select
             where g.cateCode = #{cateCode}
 </select>
 
+<!-- 상품 조회 + 카테고리 조인 -->
+	<select id="goodsView" resultType="kr.co.domain.GoodsViewVO">
+		select
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock,
+		gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
+		from tbl_goods g
+		inner join goods_category c
+		on g.cateCode = c.cateCode
+		where g.gdsNum = #{gdsNum}
+	</select>
+	
+	<!-- 상품 소감(댓글) 작성 -->
+<insert id="registReply">
+ insert into tbl_reply (gdsNum, memId, repNum, repCon)
+     values (#{gdsNum}, #{memId}, tbl_reply_seq.nextval, #{repCon})
+</insert>
+
+<!-- 상품 소감(댓글) 리스트 -->
+<select id="replyList" resultType="kr.co.domain.ReplyListVO">
+ select
+     r.gdsNum, r.memId, r.repNum, r.repCon, r.repDate, m.memName
+ from tbl_reply r
+     inner join f_member m
+         on r.memId = m.memId
+     where gdsNum = #{gdsNum}
+</select>
+
+<!-- 상품 소감(댓글) 삭제 -->
+<delete id="deleteReply">
+ delete tbl_reply
+     where repNum = #{repNum}
+         and memId = #{memId}
+</delete>
+
+<!-- 아이디 체크 -->
+<select id="replyMemIdCheck" resultType="String">
+ select memId
+  from tbl_reply
+      where repNum = #{repNum}
+</select>
+	
+	<!-- 상품 소감(댓글) 수정 -->
+<update id="modifyReply">
+ update tbl_reply
+     set
+         repCon = #{repCon}
+     where repNum = #{repNum}
+         and memId = #{memId}
+</update>
+
+<!-- 카트 담기 -->
+<insert id="addCart">
+ insert into tbl_cart (cartNum, memId, gdsNum, cartStock)
+     values (tbl_cart_seq.nextval, #{memId}, #{gdsNum}, #{cartStock})
+</insert>
+
+
+	<!-- 카트 리스트 -->
+<select id="cartList" resultType="kr.co.domain.CartListVO">
+ select
+     row_number() over(order by c.cartNum desc) as num,
+     c.cartNum, c.memId, c.gdsNum, c.cartStock, c.addDate,
+     g.gdsName, g.gdsPrice, g.gdsThumbImg
+ from tbl_cart c
+     inner join tbl_goods g
+         on c.gdsNum = g.gdsNum   
+     where c.memId = #{memId}
+</select>
+	
 </mapper>

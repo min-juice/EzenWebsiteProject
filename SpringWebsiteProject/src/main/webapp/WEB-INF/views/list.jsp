@@ -19,15 +19,26 @@
  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
-<ul>
-<c:if test="${member != null}">
-	<li>
-		<a href="/">일반 화면</a>	
-	</li>
-	<li>
-		<a href="/fmember/logout.do">로그아웃</a>
-	</li>
-</c:if>
-</ul>
+<table>
+<thead>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>메일</th>
+				<th>가입일</th>
+			</tr>
+		</thead>
+<tbody>
+<c:forEach items="${list}" var="vo">
+	<tr>
+		<td><a href="read/${vo.memId}">${vo.memId}</a></td>
+		<td>${vo.memName}</td>
+		<td>${vo.memMail}</td>
+		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.regDate}" type="date"/></td>
+	
+	</tr>
+</c:forEach>
+</tbody>
+</table>
 </body>
 </html>

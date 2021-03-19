@@ -17,9 +17,16 @@ public class GoodsViewVO {
 	private String cateName;
 	
 	private String gdsThumbImg;
+	private int level;
 	
 	
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public String getGdsThumbImg() {
 		return gdsThumbImg;
 	}

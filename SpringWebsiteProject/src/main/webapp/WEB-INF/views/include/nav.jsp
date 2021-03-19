@@ -27,18 +27,18 @@
 		<c:if test="${member != null }">
 			<!-- 로그인 o -->
 			<c:if test="${member.adminCK == 1 }">
+			
 				<!-- 관리자계정 -->
 				<li><a href="/admin/main">관리자 페이지</a></li>
 			</c:if>
 
 			<li>${member.memName}님환영합니다.</li>
-			<li><a id="gnb_logout_button">로그아웃</a></li>
+			
 			<li><a href="/fmember/read?memId=${dto.memId}">마이페이지</a></li>
-			<li>마이룸</li>
-			<li>장바구니</li>
+			<li><a href="/shop/cartList">카트 리스트</a></li>
+			<li><a id="gnb_logout_button">로그아웃</a></li>
 
 		</c:if>
-		<li>고객센터</li>
 	</ul>
 <%-- 	<c:if test="${member == null }">
 		<div class="login_button">
@@ -50,10 +50,9 @@
 	<!-- 로그인한 상태 -->
 	<c:if test="${ member != null }">
 		<div class="login_success_area">
-			<span>회원 : ${member.memName}</span> <span>충전금액 : <fmt:formatNumber
+		<span>충전금액 : <fmt:formatNumber
 					value="${member.money }" pattern="#,###.##" /></span> <span>포인트 :
 				<fmt:formatNumber value="${member.point }" pattern="#,###" />
-			</span> <a href="/fmember/logout.do">로그아웃</a>
 
 		</div>
 		</c:if>

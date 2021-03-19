@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	
+	@RequestMapping(value = "/visibleOrhidden", method = RequestMethod.GET)
+	public String test101(){
+		
+		return "test101";
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -15,5 +20,9 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		
+	}
 
 }
