@@ -20,7 +20,7 @@
 </head>
 <body>
 <h1 class="title">
-	<a href="/admin/index">Admin</a>
+	<a href="/">Admin</a>
 </h1>
 </body>
 </html>

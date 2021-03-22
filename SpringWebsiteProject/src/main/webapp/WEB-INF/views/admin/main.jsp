@@ -1,25 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>관리자 메인 페이지</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
- href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
- src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
- src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
- src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
- <link rel="stylesheet" href="/resources/css/admin/adminmain.css">
+	<title>kubg Admin</title>
+	
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 
-</head>
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap-theme.min.css">
+<script src="/resources/bootstrap/bootstrap.min.js"></script>
+	
 <style>
 	body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
 	ul { padding:0; margin:0; list-style:none;  }

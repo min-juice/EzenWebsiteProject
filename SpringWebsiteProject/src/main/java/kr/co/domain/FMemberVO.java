@@ -17,6 +17,8 @@ public class FMemberVO {
 	private int money;
 	private int point;
 	
+	private int verify;
+	
 	public FMemberVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -172,6 +174,13 @@ public class FMemberVO {
 	@Override
 	public String toString() {
 		return "F_MemberVO [memId=" + memId + ", memPw=" + memPw + ", memName=" + memName + "]";
+	}
+
+	public int getVerify() {
+		return verify;
+	}
+	public void setVerify(int verify) {
+		this.verify = verify;
 	}
 	
 	

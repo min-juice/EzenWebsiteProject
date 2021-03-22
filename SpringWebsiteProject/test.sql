@@ -80,6 +80,13 @@ COMMIT
 
 delete tbl_goods where gdsNum = 51
 
+select
+    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate, g.gdsImg, g.gdsThumbImg
+        from tbl_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode           
+            where g.cateCode = #{cateCode}
+            
 select g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock,
 		gdsDes, gdsImg, gdsDate, g.gdsImg, g.gdsThumbImg
 		from tbl_goods g
@@ -87,6 +94,15 @@ select g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gds
 		on g.cateCode = c.cateCode
 		where g.cateCode = 101
 		
+select
+    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+    gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
+        from tbl_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode           
+            where g.cateCode = 101
+             or c.cateCodeRef = 100
+            
 select level, cateName,
 		cateCode, cateCodeRef from goods_category
 		start with cateCodeRef is null connect by prior cateCode = cateCodeRef
@@ -210,3 +226,47 @@ from tbl_cart c
 inner join tbl_goods g
 on c.gdsNum = g.gdsNum
 where c.memId = 'test5'
+
+-- 주문 테이블
+create table tbl_order (
+    orderId     varchar2(50) not null,
+    memId      varchar2(50) not null,
+    orderRec    varchar2(50) not null,
+    userAddr1   varchar2(20) not null,
+    userAddr2   varchar2(50) not null,
+    userAddr3   varchar2(50) not null,
+    orderPhon   varchar2(30) not null,
+    amount      number       not null,
+    orderDate   Date         default sysdate,    
+    primary key(orderId)
+)
+
+alter table tbl_order
+    add constraint tbl_order_userId foreign key(memId)
+    references f_member(memId)
+    
+    create table tbl_order_details (
+    orderDetailsNum number       not null,
+    orderId         varchar2(50) not null,
+    gdsNum          number          not null,
+    cartStock       number          not null,
+    primary key(orderDetailsNum)
+)
+
+create sequence tbl_order_details_seq
+
+alter table tbl_order_details
+    add constraint tbl_order_details_orderId foreign key(orderId)
+    references tbl_order(orderId)
+    
+    alter table tbl_order
+    add(delivery varchar2(20) default '배송준비')
+    
+    alter table tbl_order
+    modify(userAddr1 varchar2(100))
+    
+    alter table tbl_order
+    modify(userAddr2 varchar2(100))
+    
+    alter table tbl_order
+    modify(userAddr3 varchar2(100))

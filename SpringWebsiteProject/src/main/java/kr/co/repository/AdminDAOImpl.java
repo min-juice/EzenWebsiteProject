@@ -11,6 +11,9 @@ import kr.co.domain.CategoryVO;
 import kr.co.domain.FMemberVO;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.GoodsViewVO;
+import kr.co.domain.OrderListVO;
+import kr.co.domain.OrderVO;
+import kr.co.domain.ReplyListVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -81,7 +84,41 @@ public class AdminDAOImpl implements AdminDAO{
 		
 	}
 	
-	
+	// 주문 목록
+		@Override
+		public List<OrderVO> orderList() throws Exception {
+			return sqlSession.selectList(ANS + ".orderList");
+		}
+
+		// 특정 주문 목록 
+		@Override
+		public List<OrderListVO> orderView(OrderVO order) throws Exception {
+			return sqlSession.selectList(ANS + ".orderView", order);
+		}
+
+		// 배송 상태
+		@Override
+		public void delivery(OrderVO order) throws Exception {
+			sqlSession.update(ANS + ".delivery", order);
+		}
+		
+		// 상품 수량 조절
+		@Override
+		public void changeStock(GoodsVO goods) throws Exception {		
+			sqlSession.update(ANS + ".changeStock", goods);
+		}
+
+		// 모든 소감(댓글)
+		@Override
+		public List<ReplyListVO> allReply() throws Exception {
+			return sqlSession.selectList(ANS + ".allReply");
+		}
+
+		// 소감(댓글) 삭제
+		@Override
+		public void deleteReply(int repNum) throws Exception {
+			sqlSession.delete(ANS + ".deleteReply", repNum);
+		}
 	
 
 }
